@@ -1,0 +1,50 @@
+-- What is the average cost to rent a film in the Sakila stores?
+SELECT
+	avg(rental_rate)
+from
+	film;
+
+
+-- What is the average rental cost of films by rating? On average, what is the cheapest rating of films to rent? What is the most expensive?
+select
+	rating,
+	avg(rental_rate) as avg_rate
+from
+	film
+group by
+	rating
+order by
+	avg_rate asc;
+
+
+
+-- How much would it cost to replace all films in the database?
+select
+	sum(replacement_cost)
+from 
+	film;
+
+
+
+-- How much would it cost to replace all films in each ratings category?
+select
+	rating,
+	sum(replacement_cost) as tot_cost
+from 
+	film
+group by
+	rating
+order by
+	tot_cost asc;
+
+
+-- How long is the longest movie in the database? How long is the shortest movie?
+
+Select
+	*
+from
+	film
+where
+	length = (select max(length) from film)
+order by
+	rental_rate asc;
